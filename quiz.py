@@ -5,6 +5,11 @@ import math
 
 # === UI-SKALIERUNG ===
 UI_SCALE = 0.9  # z. B. 0.8 (kleiner), 1.0 (normal), 1.2 (größer)
+IMAGE_SCALE = 0.7  # z. B. 0.6 (kleiner), 1.0 (normal), 1.2 (größer)
+POPUP_FONT_SCALE = 1.5  # z. B. 1.0 (Standard), 1.2 (größer)
+POPUP_IMAGE_SIZE = (int(1200*IMAGE_SCALE), int(800*IMAGE_SCALE))  # Breite x Höhe für Bilder in Popups
+POPUP_WIDTH = POPUP_IMAGE_SIZE[0] + 500  # etwas Puffer links/rechts
+POPUP_HEIGHT = POPUP_IMAGE_SIZE[1] + int(350 * POPUP_FONT_SCALE)  # für Text und Buttons
 
 # Daten einfügen
 quiz_fragen = {
@@ -24,7 +29,7 @@ quiz_fragen = {
         30: {
             "frage": "Wäre BW ein eigener Staat, nähme das Land unter den 27 Mitgliedstaaten der Europäischen Union der Einwohnerzahl nach den wievielten Platz ein?",
             "antworten": ["13.", "9.", "20.", "24."],
-            "korrekt": "9.",,
+            "korrekt": "9.",
             "feedback_text": "In BW leben rund 11,28 Mio Menschen.  Vorher sind: Deutschland, Frankreich, Italien, Spanien, Polen, Rumänien, Niederlande, Belgien"
         },
         40: {
@@ -96,7 +101,7 @@ quiz_fragen = {
             "frage": "Wo kann man Affen so beim entspannen vorfinden? ",
             "antworten": ["Japan", "Russland", "UK", "Vietnam"],
             "korrekt": "Japan",
-            "frage_image": "bilder/welt50.jpeg",,
+            "frage_image": "bilder/welt50.jpeg",
             "feedback_text": "Seit Jahrzehnten baden Affen in den heißen Quellen im Norden Japans. Dieses Verhalten haben sich die Japanmakaken vermutlich von Menschen abgeguckt, als sie diese in einem Badehaus beobachteten."
         }
     },
@@ -105,24 +110,24 @@ quiz_fragen = {
             "frage": "Wer trug den Beinamen „Walzerkönig“?",
             "antworten": ["Johann Baptist Strauss", "Frédéric Chopin", "Friedrich Merz", "Wolfgang Amadeus Mozart"],
             "korrekt": "Johann Baptist Strauss",
-            "feedback_image": "bilder/strauss.jpg",
+            "feedback_image": "bilder/strauss.jpeg",
         },
         20: {
             "frage": "Wie heißt das letzte Album von den Beatles?",
             "antworten": ["Yellow Submarine", "Let it be", "Abby Road", "The BEATLES"],
             "korrekt": "Let it be",
-            "feedback_image": "bilder/letitbe.jpg",
+            "feedback_image": "bilder/letitbe.jpeg",
         },
         30: {
             "frage": "Was ist laut popkultur.de das meistverkaufte Album in Deutschland?",
             "antworten": ["Dirty Dancing - verschiedene Interpreten", "ABBA Gold - ABBA", "Mensch - Herbert Grönemeyer", "Jazz ist anders - Die Ärzte"],
             "korrekt": "Dirty Dancing - verschiedene Interpreten",
-            "feedback_image": "bilder/dirtydancing.jpg",
+            "feedback_image": "bilder/dirtydancing.webp",
         },
         40: {
             "frage": "Wie viele Pfeifen hat die Orgel mit den meisten Pfeifen der Welt?",
             "antworten": ["19,001", "8,093", "11,753", "33,112"],
-            "korrekt": "33,112",,
+            "korrekt": "33,112",
             "feedback_text": "Die Orgel wird im Guinness-Buch der Rekorde als „größte Pfeifenorgel“, „größtes Musikinstrument“ und als „lautestes jemals gebautes Musikinstrument“ geführt. Offiziell besitzt sie 33.112 Pfeifen, wobei die genaue Zahl nicht bekannt ist und Experten diese eher auf unter 32.000 schätzen.",
             "feedback_image": "bilder/organ.jpg",
         },
@@ -155,9 +160,9 @@ quiz_fragen = {
             "korrekt": "Angsthase"
         },
         50: {
-            "frage": "xxx",
-            "antworten": ["Okarina", "Ukele", "Balalaika", "Bandoneon"],
-            "korrekt": "Okarina"
+            "frage": "Übersetzt das Wort aus dieser Audio Datei?",
+            "antworten": ["Johannisbeere", "Ein Bier in einer 0.2l Flasche", "Trottel", "Schwiegermutter"],
+            "korrekt": "Johannisbeere"
         }
     },
     "Wer wird Millionär": {
@@ -323,13 +328,13 @@ class GrossesPreisSpiel:
 
         popup = tk.Toplevel(bg="#ffffff")
         popup.title("Frage")
-        popup.geometry(f"{int(800 * UI_SCALE)}x{int(600 * UI_SCALE)}")
+        popup.geometry(f"{POPUP_WIDTH}x{POPUP_HEIGHT}")
 
         tk.Label(
             popup,
             text=frage,
             wraplength=int(760 * UI_SCALE),
-            font=("Helvetica", int(16 * UI_SCALE)),
+            font=("Helvetica", int(16 * UI_SCALE * POPUP_FONT_SCALE)),
             bg="#ffffff",
             fg="#333",
         ).pack(pady=int(10 * UI_SCALE))
@@ -338,7 +343,7 @@ class GrossesPreisSpiel:
         if frage_image:
             try:
                 image = Image.open(frage_image)
-                image = image.resize((400, 250))
+                image = image.resize(POPUP_IMAGE_SIZE)
                 photo = ImageTk.PhotoImage(image)
                 image_label = tk.Label(popup, image=photo, bg="#ffffff")
                 image_label.image = photo
@@ -349,12 +354,13 @@ class GrossesPreisSpiel:
                     text=f"[Bild konnte nicht geladen werden: {e}]",
                     fg="red",
                     bg="#ffffff",
+                    font=("Helvetica", int(12 * UI_SCALE * POPUP_FONT_SCALE)),
                 ).pack()
 
         team_label = tk.Label(
             popup,
             text="",
-            font=("Helvetica", int(14 * UI_SCALE), "italic"),
+            font=("Helvetica", int(14 * UI_SCALE * POPUP_FONT_SCALE), "italic"),
             bg="#ffffff",
             fg="#0057a3",
         )
@@ -409,7 +415,7 @@ class GrossesPreisSpiel:
             tk.Button(
                 popup,
                 text=a,
-                font=("Helvetica", int(14 * UI_SCALE)),
+                font=("Helvetica", int(14 * UI_SCALE * POPUP_FONT_SCALE)),
                 width=int(50 * UI_SCALE),
                 height=2,
                 bg="#f0f0f0",
@@ -421,20 +427,20 @@ class GrossesPreisSpiel:
     def zeige_feedback_popup(self, text, image_path=None):
         popup = tk.Toplevel(bg="#ffffff")
         popup.title("\U0001f389 Feedback")
-        popup.geometry(f"{int(800 * UI_SCALE)}x{int(500 * UI_SCALE)}")
+        popup.geometry(f"{POPUP_WIDTH}x{POPUP_HEIGHT}")
 
         tk.Label(
             popup,
             text=text,
             wraplength=760,
-            font=("Helvetica", int(16 * UI_SCALE)),
+            font=("Helvetica", int(16 * UI_SCALE * POPUP_FONT_SCALE)),
             bg="#ffffff",
         ).pack(pady=20)
 
         if image_path:
             try:
                 image = Image.open(image_path)
-                image = image.resize((400, 300))
+                image = image.resize(POPUP_IMAGE_SIZE)
                 photo = ImageTk.PhotoImage(image)
                 label = tk.Label(popup, image=photo, bg="#ffffff")
                 label.image = photo
@@ -445,12 +451,13 @@ class GrossesPreisSpiel:
                     text=f"[Bild konnte nicht geladen werden: {e}]",
                     bg="#ffffff",
                     fg="red",
+                    font=("Helvetica", int(12 * UI_SCALE * POPUP_FONT_SCALE)),
                 ).pack()
 
         tk.Button(
             popup,
             text="OK",
-            font=("Helvetica", int(14 * UI_SCALE)),
+            font=("Helvetica", int(14 * UI_SCALE * POPUP_FONT_SCALE)),
             bg="#c8e6c9",
             command=popup.destroy,
         ).pack(pady=20)
@@ -458,13 +465,13 @@ class GrossesPreisSpiel:
     def zeige_kategorie_frage(self, frage, thema, begriffe, punkte):
         popup = tk.Toplevel(bg="#ffffff")
         popup.title("Kategoriefrage")
-        popup.geometry(f"{int(700 * UI_SCALE)}x{int(350 * UI_SCALE)}")
+        popup.geometry(f"{POPUP_WIDTH}x{int(300 * POPUP_FONT_SCALE)}")
 
         tk.Label(
             popup,
             text=frage,
             wraplength=int(680 * UI_SCALE),
-            font=("Helvetica", int(16 * UI_SCALE)),
+            font=("Helvetica", int(16 * UI_SCALE * POPUP_FONT_SCALE)),
             bg="#ffffff",
         ).pack(pady=int(20 * UI_SCALE))
 
@@ -473,7 +480,7 @@ class GrossesPreisSpiel:
             text=f"Thema: {thema.replace('_', ' ').title()}",
             fg="gray",
             bg="#ffffff",
-            font=("Helvetica", int(12 * UI_SCALE)),
+            font=("Helvetica", int(12 * UI_SCALE * POPUP_FONT_SCALE)),
         ).pack()
 
         aktuelles_team = self.teams[self.aktuelles_team_index]
@@ -493,7 +500,7 @@ class GrossesPreisSpiel:
         tk.Label(
             popup,
             text=f"{aktuelles_team} ist dran",
-            font=("Helvetica", int(14 * UI_SCALE), "italic"),
+            font=("Helvetica", int(14 * UI_SCALE * POPUP_FONT_SCALE), "italic"),
             bg="#ffffff",
             fg="#0057a3",
         ).pack(pady=10)
@@ -504,7 +511,7 @@ class GrossesPreisSpiel:
         tk.Button(
             button_frame,
             text=f"{aktuelles_team} bekommt {punkte} Punkte",
-            font=("Helvetica", int(14 * UI_SCALE)),
+            font=("Helvetica", int(14 * UI_SCALE * POPUP_FONT_SCALE)),
             bg="#dcedc8",
             command=punkte_geben,
         ).pack(side=tk.LEFT, padx=20)
@@ -512,7 +519,7 @@ class GrossesPreisSpiel:
         tk.Button(
             button_frame,
             text="Keine Punkte",
-            font=("Helvetica", int(14 * UI_SCALE)),
+            font=("Helvetica", int(14 * UI_SCALE * POPUP_FONT_SCALE)),
             bg="#ffcdd2",
             command=keine_punkte,
         ).pack(side=tk.LEFT, padx=20)
