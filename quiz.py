@@ -22,7 +22,7 @@ quiz_fragen = {
         30: {
             "frage": "Wäre BW ein eigener Staat, nähme das Land unter den 27 Mitgliedstaaten der Europäischen Union der Einwohnerzahl nach den wievielten Platz ein?",
             "antworten": ["13.", "9.", "20.", "24."],
-            "korrekt": "9."
+            "korrekt": "9.",
         },
         40: {
             "frage": "Mit 1,493m ist der Feldberg die höchste Erhebung BW, aber wo liegt der niedrigste Punkt?",
@@ -199,7 +199,6 @@ kategorie_begriffe = {
         ],
 }
 
-
 class GrossesPreisSpiel:
     def __init__(self, master):
         self.master = master
@@ -210,7 +209,7 @@ class GrossesPreisSpiel:
         self.master.geometry(f"{int(screen_width * 0.95)}x{int(screen_height * 0.95)}")
         self.master.configure(bg="#f5f5f5")
 
-        self.teams = ["Team A", "Team B", "Team C"]
+        self.teams = self.frage_nach_teamnamen()
         self.punktestand = {team: 0 for team in self.teams}
         self.aktuelles_team_index = 0
         self.answered = set()
@@ -441,7 +440,7 @@ class GrossesPreisSpiel:
     def zeige_kategorie_frage(self, frage, thema, begriffe, punkte):
         popup = tk.Toplevel(bg="#ffffff")
         popup.title("Kategoriefrage")
-        popup.geometry(f"{int(700 * UI_SCALE)}x{int(300 * UI_SCALE)}")
+        popup.geometry(f"{int(700 * UI_SCALE)}x{int(350 * UI_SCALE)}")
 
         tk.Label(
             popup,
@@ -459,21 +458,46 @@ class GrossesPreisSpiel:
             font=("Helvetica", int(12 * UI_SCALE)),
         ).pack()
 
-        def bestaetigen():
-            aktuelles_team = self.teams[self.aktuelles_team_index]
+        aktuelles_team = self.teams[self.aktuelles_team_index]
+
+        def punkte_geben():
             self.punktestand[aktuelles_team] += punkte
             self.update_punktestand()
             popup.destroy()
             self.next_team()
             self.pruefe_spielende()
 
-        tk.Button(
+        def keine_punkte():
+            popup.destroy()
+            self.next_team()
+            self.pruefe_spielende()
+
+        tk.Label(
             popup,
-            text=f"{self.teams[self.aktuelles_team_index]} bekommt {punkte} Punkte",
+            text=f"{aktuelles_team} ist dran",
+            font=("Helvetica", int(14 * UI_SCALE), "italic"),
+            bg="#ffffff",
+            fg="#0057a3",
+        ).pack(pady=10)
+
+        button_frame = tk.Frame(popup, bg="#ffffff")
+        button_frame.pack(pady=20)
+
+        tk.Button(
+            button_frame,
+            text=f"{aktuelles_team} bekommt {punkte} Punkte",
             font=("Helvetica", int(14 * UI_SCALE)),
             bg="#dcedc8",
-            command=bestaetigen,
-        ).pack(pady=int(20 * UI_SCALE))
+            command=punkte_geben,
+        ).pack(side=tk.LEFT, padx=20)
+
+        tk.Button(
+            button_frame,
+            text="Keine Punkte",
+            font=("Helvetica", int(14 * UI_SCALE)),
+            bg="#ffcdd2",
+            command=keine_punkte,
+        ).pack(side=tk.LEFT, padx=20)
 
     def update_punktestand(self):
         self.punktestand_label.config(text=self.punktestand_text())
@@ -487,6 +511,38 @@ class GrossesPreisSpiel:
                 f"Alle Fragen beantwortet!\n\nEndstand:\n{self.punktestand_text()}\n\n\U0001f3c6 Gewinner: {gewinner}",
             )
             self.master.quit()
+
+    def frage_nach_teamnamen(self):
+        popup = tk.Toplevel()
+        popup.title("Teamnamen eingeben")
+        popup.geometry("400x300")
+        popup.grab_set()
+
+        tk.Label(popup, text="Bitte gebt eure Teamnamen ein:", font=("Helvetica", 14)).pack(pady=10)
+
+        entries = []
+        for i in range(3):
+            tk.Label(popup, text=f"Team {i+1}:", font=("Helvetica", 12)).pack()
+            entry = tk.Entry(popup, font=("Helvetica", 12))
+            entry.insert(0, f"Team {chr(65+i)}")
+            entry.pack(pady=5)
+            entries.append(entry)
+
+        teamnamen = []
+
+        def speichern():
+            for e in entries:
+                name = e.get().strip()
+                if not name:
+                    messagebox.showerror("Fehler", "Alle Teamnamen müssen ausgefüllt sein.")
+                    return
+                teamnamen.append(name)
+            popup.destroy()
+
+        tk.Button(popup, text="Weiter", command=speichern, font=("Helvetica", 12)).pack(pady=20)
+
+        popup.wait_window()
+        return teamnamen
 
 
 if __name__ == "__main__":
