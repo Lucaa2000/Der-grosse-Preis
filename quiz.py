@@ -32,7 +32,8 @@ quiz_fragen = {
         50: {
             "frage": "Wo steht dieses Denkmal?",
             "antworten": ["Lörrach", "xx", "xx", "xx"],
-            "korrekt": "Lörrach"
+            "korrekt": "Lörrach",
+            "frage_image": "bilder/bw50.jpeg",
         }
     },
     "Kategorie": {
@@ -86,7 +87,8 @@ quiz_fragen = {
         50: {
             "frage": "Wo kann man Affen so beim entspannen vorfinden? ",
             "antworten": ["Japan", "Russland", "UK", "Vietnam"],
-            "korrekt": "Japan"
+            "korrekt": "Japan",
+            "frage_image": "bilder/welt50.jpeg",
         }
     },
      "Musik": {
@@ -108,7 +110,7 @@ quiz_fragen = {
         40: {
             "frage": "Wie viele Pfeifen hat die Orgel mit den meisten Pfeifen der Welt?",
             "antworten": ["19,001", "8,093", "11,753", "33,112"],
-            "korrekt": "33,112"
+            "korrekt": "33,112",
         },
         50: {
             "frage": "Welches dieser Instrumente ist ein Blasinstrument?",
@@ -152,7 +154,7 @@ quiz_fragen = {
         20: {
             "frage": "Was sehen ihre über 4,5 Millionen Instagram-Follower:innen sozusagen, wenn Mode- und Fitness-Influencerin Caro live beim Sport streamt?",
             "antworten": ["Daurlauf", "Wandrung", "Spazirgang", "Abstechr"],
-            "korrekt": "Ein ungepflegter, arbeitsscheuer Kerl"
+            "korrekt": "Daurlauf"
         },
         30: {
             "frage": "Was durften Männer ihren Ehefrauen in Deutschland bis 1977 (rechtlich) verbieten??",
@@ -201,7 +203,7 @@ kategorie_begriffe = {
 class GrossesPreisSpiel:
     def __init__(self, master):
         self.master = master
-        self.master.title("🎓 Der Große Preis")
+        self.master.title("\U0001f393 Der Große Preis")
 
         screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
@@ -251,7 +253,7 @@ class GrossesPreisSpiel:
         )
 
     def aktuelles_team_text(self):
-        return f"🎯 Am Zug: {self.teams[self.aktuelles_team_index]}"
+        return f"\U0001f3af Am Zug: {self.teams[self.aktuelles_team_index]}"
 
     def next_team(self):
         self.aktuelles_team_index = (self.aktuelles_team_index + 1) % len(self.teams)
@@ -304,7 +306,7 @@ class GrossesPreisSpiel:
 
         popup = tk.Toplevel(bg="#ffffff")
         popup.title("Frage")
-        popup.geometry(f"{int(800 * UI_SCALE)}x{int(400 * UI_SCALE)}")
+        popup.geometry(f"{int(800 * UI_SCALE)}x{int(600 * UI_SCALE)}")
 
         tk.Label(
             popup,
@@ -313,7 +315,24 @@ class GrossesPreisSpiel:
             font=("Helvetica", int(16 * UI_SCALE)),
             bg="#ffffff",
             fg="#333",
-        ).pack(pady=int(20 * UI_SCALE))
+        ).pack(pady=int(10 * UI_SCALE))
+
+        frage_image = frage_daten.get("frage_image")
+        if frage_image:
+            try:
+                image = Image.open(frage_image)
+                image = image.resize((400, 250))
+                photo = ImageTk.PhotoImage(image)
+                image_label = tk.Label(popup, image=photo, bg="#ffffff")
+                image_label.image = photo
+                image_label.pack(pady=(0, 10))
+            except Exception as e:
+                tk.Label(
+                    popup,
+                    text=f"[Bild konnte nicht geladen werden: {e}]",
+                    fg="red",
+                    bg="#ffffff",
+                ).pack()
 
         team_label = tk.Label(
             popup,
@@ -384,7 +403,7 @@ class GrossesPreisSpiel:
 
     def zeige_feedback_popup(self, text, image_path=None):
         popup = tk.Toplevel(bg="#ffffff")
-        popup.title("🎉 Feedback")
+        popup.title("\U0001f389 Feedback")
         popup.geometry(f"{int(800 * UI_SCALE)}x{int(500 * UI_SCALE)}")
 
         tk.Label(
@@ -464,8 +483,8 @@ class GrossesPreisSpiel:
         if len(self.answered) == total:
             gewinner = max(self.punktestand, key=self.punktestand.get)
             messagebox.showinfo(
-                "🏁 Spiel beendet",
-                f"Alle Fragen beantwortet!\n\nEndstand:\n{self.punktestand_text()}\n\n🏆 Gewinner: {gewinner}",
+                "\U0001f3c1 Spiel beendet",
+                f"Alle Fragen beantwortet!\n\nEndstand:\n{self.punktestand_text()}\n\n\U0001f3c6 Gewinner: {gewinner}",
             )
             self.master.quit()
 
