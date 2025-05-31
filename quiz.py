@@ -12,7 +12,9 @@ quiz_fragen = {
         10: {
             "frage": "Wie viel kostet ein Erwachsenenticket im Europapark?",
             "antworten": ["63", "45", "72", "52"],
-            "korrekt": "52"
+            "korrekt": "52",
+            "feedback_image": "bilder/europapark.jpg",
+
         },
         20: {
             "frage": "Wann wurde BW gegründet?",
@@ -22,17 +24,20 @@ quiz_fragen = {
         30: {
             "frage": "Wäre BW ein eigener Staat, nähme das Land unter den 27 Mitgliedstaaten der Europäischen Union der Einwohnerzahl nach den wievielten Platz ein?",
             "antworten": ["13.", "9.", "20.", "24."],
-            "korrekt": "9."
+            "korrekt": "9.",
+            "feedback_text": "In BW leben rund 11,28 Mio Menschen.  Vorher sind: Deutschland, Frankreich, Italien, Spanien, Polen, Rumänien, Niederlande, Belgien"
         },
         40: {
             "frage": "Mit 1,493m ist der Feldberg die höchste Erhebung BW, aber wo liegt der niedrigste Punkt?",
             "antworten": ["Karlsruhe", "Mannheim", "Kirchheim", "Kehl"],
-            "korrekt": "Mannheim"
+            "korrekt": "Mannheim",
+            "feedback_text": "Rheinpegel bei Mannheim, 85m ü NN"
         },
         50: {
             "frage": "Wo steht dieses Denkmal?",
-            "antworten": ["Lörrach", "xx", "xx", "xx"],
-            "korrekt": "Lörrach"
+            "antworten": ["Lörrach", "Endingen", "Meersburg", "Mosbach"],
+            "korrekt": "Lörrach", 
+            "feedback_text": "Burgruine Rötteln in Lörrach-Haagen, 1259"
         }
     },
     "Kategorie": {
@@ -66,12 +71,14 @@ quiz_fragen = {
         10: {
             "frage": "Italien und Eiscreme sind untrennbar miteinander verbunden. Aber wo wurde Eiscreme eigentlich erfunden?",
             "antworten": ["Irak", "Griechenland", "Italien", "China"],
-            "korrekt": "China"
+            "korrekt": "China",
+            "feedback_text": "Das erste Speiseeis gab es im Alten China. Aber auch Hippokrates, der große Arzt des antiken Griechenland, soll eine Vorliebe für Eis gehegt haben. Im 13. Jahrhundert beschrieb Marco Polo ein Eisrezept aus China. Katharina de Medici brachte bei ihrer Heirat mit Heinrich II. 1533 einen eigenen Gelatiere mit nach Paris. Die erste Eisdiele gab es in Paris im 17. Jahrhundert."
         },
         20: {
             "frage": "An wie viele Länder grenzt Bulgarien?",
             "antworten": ["3", "12", "8", "5"],
-            "korrekt": "5"
+            "korrekt": "5",
+            "feedback_text": "Rumänien, Serbien, Nord-Macedonien, Griechenland, Türkei"
         },
         30: {
             "frage": "Vatikanstadt, Monaco, Nauru und Tuvalu gehören zu den 5 kleinsten Ländern. Welches Land gehört auch dazu?",
@@ -81,39 +88,47 @@ quiz_fragen = {
         40: {
             "frage": "Ferdinand Magellan war ein Seefahrer im 16. Jahrhundert, der für die erste dokumentierte Weltumsegelung bekannt ist. Für welche Musikrichtung ist heute seine Heimat bekannt?",
             "antworten": ["Fado", "Regggae", "Flamenco", "Liscio"],
-            "korrekt": "Fado"
+            "korrekt": "Fado",
+            "feedback_text": "Der portugiesische Seefahrer Ferdinand Magellan brach im September 1519 vom spanischen Sanlúcar mit fünf Schiffen und 244 Besatzungsmitgliedern zur Weltumsegelung auf. Anfang September 1522 wurde diese nach zwei Jahren, elf Monaten und zwei Wochen mit nur 18 Mann abgeschlossen. Magellan selbst war nicht dabei: Er starb 1521 während der Expedition. Die Westpassage, die den Atlantischen und den Pazifischen Ozean miteinander verbindet, heißt ihm zu Ehren Magellanstraße. Entstanden ist der Fado, ein Musikstil voller Molltöne, in den historischen Stadtvierteln Lissabons. Das portugiesische Lebensgefühl der Saudade, am ehesten mit Weltschmerz übersetzbar, findet in den melancholischen Klängen seinen Ausdruck."
         },
         50: {
             "frage": "Wo kann man Affen so beim entspannen vorfinden? ",
             "antworten": ["Japan", "Russland", "UK", "Vietnam"],
-            "korrekt": "Japan"
+            "korrekt": "Japan",
+            "feedback_text": "Seit Jahrzehnten baden Affen in den heißen Quellen im Norden Japans. Dieses Verhalten haben sich die Japanmakaken vermutlich von Menschen abgeguckt, als sie diese in einem Badehaus beobachteten."
         }
     },
      "Musik": {
         10: {
             "frage": "Wer trug den Beinamen „Walzerkönig“?",
             "antworten": ["Johann Baptist Strauss", "Frédéric Chopin", "Friedrich Merz", "Wolfgang Amadeus Mozart"],
-            "korrekt": "Johann Baptist Strauss"
+            "korrekt": "Johann Baptist Strauss",
+            "feedback_image": "bilder/strauss.jpg",
         },
         20: {
             "frage": "Wie heißt das letzte Album von den Beatles?",
             "antworten": ["Yellow Submarine", "Let it be", "Abby Road", "The BEATLES"],
-            "korrekt": "Let it be"
+            "korrekt": "Let it be",
+            "feedback_image": "bilder/letitbe.jpg",
         },
         30: {
             "frage": "Was ist laut popkultur.de das meistverkaufte Album in Deutschland?",
             "antworten": ["Dirty Dancing - verschiedene Interpreten", "ABBA Gold - ABBA", "Mensch - Herbert Grönemeyer", "Jazz ist anders - Die Ärzte"],
-            "korrekt": "Dirty Dancing - verschiedene Interpreten"
+            "korrekt": "Dirty Dancing - verschiedene Interpreten",
+            "feedback_image": "bilder/dirtydancing.jpg",
         },
         40: {
             "frage": "Wie viele Pfeifen hat die Orgel mit den meisten Pfeifen der Welt?",
             "antworten": ["19,001", "8,093", "11,753", "33,112"],
-            "korrekt": "33,112"
+            "korrekt": "33,112",
+            "feedback_text": "Die Orgel wird im Guinness-Buch der Rekorde als „größte Pfeifenorgel“, „größtes Musikinstrument“ und als „lautestes jemals gebautes Musikinstrument“ geführt. Offiziell besitzt sie 33.112 Pfeifen, wobei die genaue Zahl nicht bekannt ist und Experten diese eher auf unter 32.000 schätzen.",
+            "feedback_image": "bilder/organ.jpg",
         },
         50: {
             "frage": "Welches dieser Instrumente ist ein Blasinstrument?",
-            "antworten": ["Okarina", "Ukele", "Balalaika", "Bandoneon"],
-            "korrekt": "Okarina"
+            "antworten": ["Okarina", "Ukulele", "Balalaika", "Bandoneon"],
+            "korrekt": "Okarina",
+            "feedback_image": "bilder/flute.jpg",
         }
     },
     "Dialekte": {
@@ -133,9 +148,9 @@ quiz_fragen = {
             "korrekt": "Geld abknöpfen"
         },
         40: {
-            "frage": "xxx",
-            "antworten": ["19,001", "8,093", "11,753", "33,112"],
-            "korrekt": "33,112"
+            "frage": "Was bedeutet das plattdeutsche Wort 'Bangbüx'?",
+            "antworten": ["Brotdose", "Angsthase", "Kondom", "Rassel"],
+            "korrekt": "Angsthase"
         },
         50: {
             "frage": "xxx",
@@ -157,17 +172,20 @@ quiz_fragen = {
         30: {
             "frage": "Was durften Männer ihren Ehefrauen in Deutschland bis 1977 (rechtlich) verbieten??",
             "antworten": ["Autofahren", "Arbeiten", "Wählen gehen", "Rauchen"],
-            "korrekt": "Arbeiten"
+            "korrekt": "Arbeiten",
+            "feedback_text": "Das Bürgerliche Gesetzbuch schrieb bis 1977 vor, dass Männer die Erwerbsarbeit ihrer Ehefrauen erlauben mussten. Bis 1958 konnten Männer das Arbeitsverhältnis ihrer Ehefrauen ohne deren Einwilligung fristlos kündigen."
         },
         40: {
             "frage": "Welches war 2024 mit ca. 300.000 Einheiten das meistverkaufte Auto in Europa - davon aber nur ein winziger Bruchteil im Heimatland?",
             "antworten": ["Peugeot 208", "Hyundai Tucson", "VW golf", "Dacia Sandero"],
-            "korrekt": "Dacia Sandero"
+            "korrekt": "Dacia Sandero",
+            "feedback_text": "Die Marke Dacia kommt ursprünglich aus Rumänien, gehört aber mittlerweile zu Renault. "
         },
         50: {
             "frage": "Rigoberta Menchú Friedensnobelpreisträgerin von 1992 kandidierte einst für das Präsidentenamt in welchem Land?",
             "antworten": ["Honduras", "Kolumbien", "Guatemala", "Mexiko"],
-            "korrekt": "Guatemala"
+            "korrekt": "Guatemala",
+            "feedback_text": "Sie spielte eine wichtige Rolle im guatemaltekischen Bürgerkrieg und setzt sich für die Rechte indigener Völker ein. "
         }
     }
 }
